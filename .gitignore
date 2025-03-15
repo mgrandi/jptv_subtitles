@@ -7,6 +7,8 @@
 .env
 # ignore cookies.json
 cookies.json
+# ignore downloaded subtitles
+subtitles/
 
 ### Python ###
 # Byte-compiled / optimized / DLL files

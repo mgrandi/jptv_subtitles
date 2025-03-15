@@ -9,7 +9,7 @@ import attrs
 import json
 from bs4 import BeautifulSoup
 
-logging.basicConfig(level="DEBUG")
+logging.basicConfig(level="INFO")
 logger = logging.getLogger("root")
 
 def entrypoint():
@@ -55,6 +55,7 @@ class Main:
 
             current_page = 1
             while True:
+                logger.info("on page `%s`", current_page)
                 main_subtitle_result = await aiohttp_session.get(f"https://jptv.club/subtitles?page={current_page}")
 
                 main_subtitle_page_result_text = await main_subtitle_result.text()
@@ -141,12 +142,10 @@ class Main:
                         data = await subtitle_dl_result.read()
                         f2.write(data)
 
-                    await asyncio.sleep(1)
 
 
                 current_page += 1
 
-                await asyncio.sleep(2)
 
 
     def get_user_html(self, element):
