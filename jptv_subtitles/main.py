@@ -130,8 +130,13 @@ class Main:
                     basedir = pathlib.Path.cwd() / "subtitles"
                     basedir.mkdir(exist_ok=True)
 
-                    json_path = basedir / f"subtitle_{iter_record.subtitle_id}-{iter_record.torrent_title}-{iter_record.language}{iter_record.extension}.json"
-                    file_path = basedir / f"subtitle_{iter_record.subtitle_id}-{iter_record.torrent_title}-{iter_record.language}{iter_record.extension}"
+
+                    safename = iter_record.torrent_title.replace("/", "_")
+                    if len(safename) > 60:
+                        safename = safename[0:60]
+
+                    json_path = basedir / f"subtitle_{iter_record.subtitle_id}-{safename}-{iter_record.language}{iter_record.extension}.json"
+                    file_path = basedir / f"subtitle_{iter_record.subtitle_id}-{safename}-{iter_record.language}{iter_record.extension}"
 
                     with open(json_path, "w", encoding="utf-8") as f:
                         logger.debug("writing json to `%s`", json_path)
